@@ -58,6 +58,8 @@ python ./v1s_run.py params_simple.py /tmp/101_ObjectCategories
 # Assess the performance of a simple V1-like model + cheap tricks
 python ./v1s_run.py params_simple_plus.py /tmp/101_ObjectCategories 
 
+# see 'reproducing_caltech101_results.rst' for more info
+
 -------------------------------------------------------------------------------
 Known Issue:
 
