@@ -26,13 +26,13 @@ def main(param_fname, img_path):
     # -- get image filenames
     img_path = os.path.abspath(img_path)
     print "Image source:", img_path
-    
+
     # navigate tree structure and collect a list of files to process
     if not os.path.isdir(img_path):
         raise ValueError, "%s is not a directory" % (img_path)
     tree = os.walk(img_path)
     filelist = []
-    categories = tree.next()[1]    
+    categories = tree.next()[1]
     for root, dirs, files in tree:
         if dirs != []:
             msgs = ["invalid image tree structure:"]
@@ -41,23 +41,23 @@ def main(param_fname, img_path):
             msg = "\n".join(msgs)
             raise Exception, msg
         filelist += [ root+'/'+f for f in files if os.path.splitext(f)[-1] in EXTENSIONS ]
-    filelist.sort()    
+    filelist.sort()
     print len(categories), "categories found:"
     print categories
-    
-    
+
+
     # -- create a V1S (model) object with the chosen parameters and filelist
     kwargs = v1s_params['protocol']
     kwargs['filelist'] = filelist
     v1s = V1S(**kwargs)
-    
+
     # -- assessment of model performance
     v1s.get_performance(v1s_params['model'], v1s_params['pca_threshold'])
 
 # -----------------------------------------------------------------------------
 if __name__ == "__main__":
     try:
-        mod_fname = sys.argv[1]    
+        mod_fname = sys.argv[1]
         img_path = sys.argv[2]
     except IndexError:
         progname = sys.argv[0]
@@ -68,5 +68,5 @@ if __name__ == "__main__":
 
     main(mod_fname, img_path)
 
-        
+
 
